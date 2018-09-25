@@ -7,7 +7,7 @@ public class HelloWorld {
 		String name = sc.next();  
 		System.out.println("Hello world I am " + name);*/
 		static String filename = "Input your filename here";
-    		public static void main(String[] args) {
+    		public static void main(String[] args) { 
 		System.out.println("Hello world I'm TDTU");
 		int count= 0;
 		try{
