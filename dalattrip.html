@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch Trình Phượt Đà Lạt 2N2Đ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .timeline {
+            padding: 40px;
+            position: relative;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .day-section {
+            margin-bottom: 50px;
+        }
+        
+        .day-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .day-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            z-index: 2;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .night {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        }
+        
+        .day1 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .day2 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .day-title {
+            margin-left: 20px;
+            flex: 1;
+        }
+        
+        .day-title h2 {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .day-title p {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        .activity {
+            margin-left: 100px;
+            margin-bottom: 25px;
+            position: relative;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .activity:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .activity::before {
+            content: '';
+            position: absolute;
+            left: -54px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            background: white;
+            border: 4px solid #667eea;
+            border-radius: 50%;
+        }
+        
+        .time {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: inline-block;
+            background: #ffe5e5;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+        
+        .description {
+            color: #34495e;
+            line-height: 1.6;
+            margin-top: 8px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .warning-section {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px;
+        }
+        
+        .warning-section h3 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+        }
+        
+        .warning-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .warning-item strong {
+            color: #e74c3c;
+        }
+        
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .activity {
+                margin-left: 60px;
+            }
+            
+            .activity::before {
+                left: -38px;
+            }
+            
+            .day-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏍️ PHƯỢT ĐÀ LẠT 2 NGÀY 2 ĐÊM</h1>
+            <p>Hành trình xuyên đêm - Săn mây - Trải nghiệm ẩm thực</p>
+        </div>
+        
+        <div class="timeline">
+            <!-- ĐÊM KHỞI HÀNH -->
+            <div class="day-section">
+                <div class="day-header">
+                    <div class="day-icon night">🌙</div>
+                    <div class="day-title">
+                        <h2>Đêm Khởi Hành</h2>
+                        <p>Thứ Sáu, 06/02 - Hành trình xuyên đêm</p>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">20:30</div>
+                    <div class="description">
+                        <strong>Xuất phát từ TP.HCM</strong><br>
+                        ✓ Kiểm tra kỹ lốp xe, thắng, đèn<br>
+                        ✓ Đổ đầy bình xăng<br>
+                        ✓ Hướng ra QL1A
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">22:30</div>
+                    <div class="description">
+                        <strong>Dừng chân chặng 1</strong> - Trạm Long Khánh/Dầu Giây<br>
+                        Nghỉ ngơi 20 phút, uống cà phê/nước tăng lực
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">01:00 🌃</div>
+                    <div class="description">
+                        <strong>Dừng chân chặng 2</strong> - Chân đèo Bảo Lộc (Madagui)<br>
+                        ⚠️ <span class="highlight">Thời điểm dễ buồn ngủ nhất!</span><br>
+                        ✓ Rửa mặt, tỉnh táo<br>
+                        ✓ Mặc thêm áo khoác dày, khăn len
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">01:30 - 02:30</div>
+                    <div class="description">
+                        <strong>Chinh phục đèo Bảo Lộc</strong><br>
+                        ⚠️ Chạy chậm, giữ khoảng cách an toàn<br>
+                        (Xe khách đêm chạy rất nhanh)
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">02:30 - 04:00</div>
+                    <div class="description">
+                        <strong>Qua Di Linh, Đức Trọng</strong><br>
+                        🌡️ Nhiệt độ: 12-14°C<br>
+                        ⚠️ Tập trung cao độ vì trời cực lạnh
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">04:30</div>
+                    <div class="description">
+                        <strong>Có mặt tại <span class="highlight">Định An</span></strong><br>
+                        (Dưới chân đèo Prenn)
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGÀY 1 -->
+            <div class="day-section">
+                <div class="day-header">
+                    <div class="day-icon day1">🐟</div>
+                    <div class="day-title">
+                        <h2>Ngày 1 - Nghỉ Ngơi & Khám Phá</h2>
+                        <p>Thứ Bảy, 07/02 - Cá hồ - Ốc 33 - Cloud View</p>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">05:00 - 10:00</div>
+                    <div class="description">
+                        <strong>Nhận phòng & Ngủ bù</strong> tại Định An<br>
+                        😴 Hồi phục sức lực sau hành trình đêm
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">10:30</div>
+                    <div class="description">
+                        <strong>🐟 Ăn cá tại hồ cá ngoại ô Định An</strong><br>
+                        Thưởng thức cá tầm, cá hồi tươi sống<br>
+                        📸 View mặt hồ thoáng đãng
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:30</div>
+                    <div class="description">
+                        <strong>Vượt đèo Prenn/Mimosa</strong><br>
+                        Di chuyển vào trung tâm thành phố
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">14:30</div>
+                    <div class="description">
+                        <strong>☕ Cà phê Lưng Chừng</strong><br>
+                        Hẻm 31/8 đường 3/4<br>
+                        🌲 Ngồi giữa rừng thông, nghe tiếng chim hót cực chill
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">17:00</div>
+                    <div class="description">
+                        <strong>🐌 Ốc nhồi thịt 33</strong><br>
+                        Số 33 Hai Bà Trưng<br>
+                        Thưởng thức ốc nóng hổi + rượu hâm nóng xua tan cái lạnh
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">19:00</div>
+                    <div class="description">
+                        <strong>Check-in tại <span class="highlight">Cloud View</span></strong><br>
+                        Khu vực Trại Mát - Cầu Đất<br>
+                        (Mây Lang Thang hoặc glamping/homestay)<br>
+                        💡 Thuận tiện cho việc săn mây sáng hôm sau
+                    </div>
+                </div>
+            </div>
+            
+            <!-- NGÀY 2 -->
+            <div class="day-section">
+                <div class="day-header">
+                    <div class="day-icon day2">☁️</div>
+                    <div class="day-title">
+                        <h2>Ngày 2 - Săn Mây & Về Nhà</h2>
+                        <p>Chủ Nhật, 08/02 - Cloud View - Đồi Hoa Giấy - TP.HCM</p>
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">06:00</div>
+                    <div class="description">
+                        <strong>☁️ Săn mây tại chỗ</strong><br>
+                        Khu vực Cầu Đất - "Thánh địa săn mây"<br>
+                        📸 Thời điểm vàng để chụp ảnh
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">08:00</div>
+                    <div class="description">
+                        <strong>Ăn sáng tại Cloud View</strong><br>
+                        ☕ Nhâm nhi cà phê + ngắm thung lũng mây trắng xóa
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">09:30</div>
+                    <div class="description">
+                        <strong>Thu dọn & kiểm tra xe</strong><br>
+                        Bắt đầu hành trình xuống núi
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">12:00</div>
+                    <div class="description">
+                        <strong>🌸 Trạm dừng chân Đồi Hoa Giấy</strong><br>
+                        Gần ngã ba QL28 rẽ về Di Linh/Phan Thiết<br>
+                        🍚 Ăn trưa: Cơm lam, gà nướng, cơm gia đình<br>
+                        📸 Check-in với hoa giấy rực rỡ đang vào mùa đẹp nhất
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">13:30</div>
+                    <div class="description">
+                        <strong>Đổ đèo Bảo Lộc</strong><br>
+                        Tiếp tục hành trình về TP.HCM
+                    </div>
+                </div>
+                
+                <div class="activity">
+                    <div class="time">19:30 - 20:30</div>
+                    <div class="description">
+                        <strong>🏁 Về đến TP.HCM</strong><br>
+                        Kết thúc hành trình 2 ngày 2 đêm đầy thú vị!
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="warning-section">
+            <h3>⚠️ Lưu Ý Quan Trọng</h3>
+            
+            <div class="warning-item">
+                <strong>📍 Đoạn Định An:</strong> Gần đường cao tốc Liên Khương - Prenn cũ. Chú ý biển báo, đi đúng làn đường quy định.
+            </div>
+            
+            <div class="warning-item">
+                <strong>💡 Ánh sáng:</strong> Đường từ Định An lên Cà phê Lưng Chừng (đường 3/4) khá đẹp nhưng xe cộ đông. Cẩn thận các đoạn cua!
+            </div>
+            
+            <div class="warning-item">
+                <strong>🧥 Giữ ấm:</strong> Từ Cloud View (Cầu Đất) về Bảo Lộc nhiệt độ chênh lệch rất lớn. Mặc áo gió để tránh cảm lạnh khi thay đổi cao độ nhanh.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🏍️ Chúc bạn có một chuyến phượt an toàn và đầy kỷ niệm! 🏍️</p>
+        </div>
+    </div>
+</body>
+</html>
